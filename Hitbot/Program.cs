@@ -120,14 +120,14 @@ namespace Hitbot
             return initial_code;
         }
 
-        // 坐标运动模式
+        // position运动模式
         static int RobotSetPositionMove(ControlBeanEx robot, float goal_x, float goal_y, float goal_z, float rotation, float speed)
         {
             int move_code = robot.set_position_move(goal_x, goal_y, goal_z, rotation, speed, 1, 1, 1);
             return move_code;
         }
 
-        // 关节运动模式
+        // angle运动模式
         static int RobotAngleMove(ControlBeanEx robot, float angle1, float angle2, float z, float rotation, float speed)
         {
             int move_code = robot.set_angle_move(angle1, angle2, z, rotation, speed);
@@ -181,6 +181,18 @@ namespace Hitbot
             {
                 return false;
             }
+        }
+
+        // 机械手位置数据
+        public static void GetRobotData(ControlBeanEx robot, out float x, out float y, out float z, out float r, out float angle1, out float angle2)
+        {
+            robot.get_scara_param();
+            x = robot.x;
+            y = robot.y;
+            z = robot.z;
+            r = robot.rotation;
+            angle1 = robot.angle1;
+            angle2 = robot.angle2;
         }
     }
 }
